@@ -4170,6 +4170,8 @@ with pkgs;
 
   simdjson = callPackage ../development/libraries/simdjson { };
 
+  shipwright = pkgsi686Linux.callPackage ../games/shipwright { };
+
   shipyard = callPackage ../tools/virtualization/shipyard { };
 
   shisho = callPackage ../tools/security/shisho { };
