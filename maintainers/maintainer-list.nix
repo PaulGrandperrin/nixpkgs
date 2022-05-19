@@ -9753,6 +9753,12 @@
     githubId = 116740;
     name = "Paweł Pacana";
   };
+  paulg = {
+    email = "paul.grandperrin@gmail.com";
+    github = "PaulGrandperrin";
+    githubId = 1748936;
+    name = "Paul Grandperrin";
+  };
   pb- = {
     email = "pbaecher@gmail.com";
     github = "pb-";

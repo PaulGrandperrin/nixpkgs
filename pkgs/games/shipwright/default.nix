@@ -1,6 +1,7 @@
 { stdenv
 , lib
 , fetchFromGitHub
+, fetchpatch
 , makeDesktopItem
 , copyDesktopItems
 , makeWrapper
@@ -78,6 +79,29 @@ stdenv.mkDerivation rec {
     StormLib
   ];
 
+  patches = [
+    (fetchpatch {
+      name = "move_shipofharkinian.ini_to_xdg";
+      url = "https://github.com/PaulGrandperrin/Shipwright/commit/f7f375b5998c28964a5d4fabced874a4812a3c0e.patch";
+      hash = "sha256-L4EPlClsSW4hzpPl6h9vjqZPu3y79UnW4Z9ufnFdy5o=";
+    })
+    (fetchpatch {
+      name = "read_oot.otr_from_store";
+      url = "https://github.com/PaulGrandperrin/Shipwright/commit/8161a065d673f99b816d16a7ffd57b0c3d2a6c3f.patch";
+      hash = "sha256-ZhWBhE6XbzZX6WCycCagiQhJCQtPxQ+9ebL0MSgIY/Y=";
+    })
+    (fetchpatch {
+      name = "move_oot_save.sav_to_xdg";
+      url = "https://github.com/PaulGrandperrin/Shipwright/commit/e34267f9612099dfcb19e369d10e26c99b2623e0.patch";
+      hash = "sha256-x/sV7tkIqIonSQ/d/MVHeB/gMRQymmLofeFN1F7fE4M=";
+    })
+    (fetchpatch {
+      name = "move_cvars.cfg_to_xdg";
+      url = "https://github.com/PaulGrandperrin/Shipwright/commit/505edf183d1eb2d13b1d584f57d51429173258ee.patch";
+      hash = "sha256-qBDcn7kGHcewaKch0zyRHvaXLKvt8V1QvZAEG2ZmL4I=";
+    })
+  ];
+
   postPatch = ''
     # This script attempts to call git to retrieve the commit hash,
     # so we have to manually patch it in instead.
@@ -99,12 +123,9 @@ stdenv.mkDerivation rec {
     runHook preInstall
 
     mkdir -p $out/{bin,lib,share/pixmaps}
-    cp soh.elf oot.otr $out/lib
+    cp soh.elf $out/bin/soh
+    cp oot.otr $out/lib
     cp ../OTRExporter/assets/ship_of_harkinian/icons/gSohIcon.png $out/share/pixmaps/soh.png
-
-    # oot.otr needs to be in the same directory as soh itself
-    makeWrapper $out/lib/soh.elf $out/bin/soh \
-      --argv0 "$out/lib"
 
     runHook postInstall
   '';
@@ -131,7 +152,7 @@ stdenv.mkDerivation rec {
     '';
     mainProgram = "soh";
     platforms = [ "i686-linux" ];
-    maintainers = [ maintainers.ivar ];
+    maintainers = [ maintainers.ivar maintainer.paulg ];
     license = with licenses; [
       # OTRExporter, OTRGui, ZAPDTR, libultraship
       mit
