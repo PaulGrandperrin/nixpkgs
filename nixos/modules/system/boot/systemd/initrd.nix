@@ -467,7 +467,6 @@ in {
           # Initialize the system
           export IN_NIXOS_SYSTEMD_STAGE1=true
           exec chroot /sysroot $closure/prepare-root
-          umount /nix
         '';
       };
 
