@@ -462,10 +462,12 @@ in {
           # and /run/current-system.
           mkdir -p /sysroot/run
           mount --bind /run /sysroot/run
+          mount --bind /sysroot/nix /nix
 
           # Initialize the system
           export IN_NIXOS_SYSTEMD_STAGE1=true
           exec chroot /sysroot $closure/prepare-root
+          umount /nix
         '';
       };
 
