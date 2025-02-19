@@ -21615,8 +21615,8 @@
         "archives": [
           {
             "os": "all",
-            "sha1": "2a0b06a1c89b52a3d70ce5d40554b094c1c1d0ac",
-            "size": 64281656,
+            "sha1": "0bb560a90a7a2cbd0dd8348224d518b638fe7949",
+            "size": 64273788,
             "url": "https://dl.google.com/android/repository/platform-35_r02.zip"
           }
         ],
